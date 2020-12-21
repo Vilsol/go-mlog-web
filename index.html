@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+
+	<title>Go to MLOG</title>
+
+	<link rel='icon' type='image/png' href='/favicon.png'>
+	<link rel='stylesheet' href='/global.css'>
+	<link rel='stylesheet' href='/build/bundle.css'>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+	<script src='https://vilsol.github.io/go-mlog/wasm_exec.js'></script>
+
+	<script>
+		const go = new Go();
+		WebAssembly.instantiateStreaming(fetch("https://vilsol.github.io/go-mlog/go-mlog.wasm"), go.importObject).then((result) => {
+			go.run(result.instance);
+		});
+	</script>
+
+	<script type="module" defer src='/build/main.js'></script>
+</head>
+
+<body>
+</body>
+</html>
