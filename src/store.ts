@@ -1,0 +1,46 @@
+import {writable} from "svelte/store";
+
+export interface Filesystem {
+  [key: string]: {
+    data: string;
+  }
+}
+
+const initialFile = `package main
+
+import "github.com/Vilsol/go-mlog/m"
+
+func main() {
+\tprint("Hello World: ")
+\tprintln(fibonacci(10))
+\tm.PrintFlush("message1")
+}
+
+func fibonacci(n int) {
+\tif n <= 1 {
+\t\treturn n
+\t}
+
+\tgrandparent := 1
+\tparent := 2
+\tresult := parent
+\tfor i := 3; i < n; i++ {
+\t\tme = parent + grandparent
+\t\tgrandparent = parent
+\t\tparent = me
+\t}
+
+\treturn result
+}`
+
+let initialFs: Filesystem = {example: {data: initialFile}};
+
+if (localStorage.getItem('mlog_fs')) {
+  initialFs = JSON.parse(localStorage.getItem('mlog_fs'));
+}
+
+export const filesystem = writable(initialFs);
+
+export const currentFile = writable(Object.keys(initialFs).sort()[0]);
+
+filesystem.subscribe((fs) => localStorage.setItem('mlog_fs', JSON.stringify(fs)));
