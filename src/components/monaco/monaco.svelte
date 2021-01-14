@@ -38,8 +38,9 @@
 
 <script lang="ts">
   import {onMount} from 'svelte';
-  import {currentFile, filesystem} from '../../store';
+  import {currentFile, errorCompiling, filesystem} from '../../store';
   import type {editor} from "monaco-editor";
+  import {MarkerSeverity} from "monaco-editor";
 
   let container;
   let editor: editor.IStandaloneCodeEditor;
@@ -79,12 +80,40 @@
       const fs = $filesystem;
       if (fs && file) {
         if (file in fs) {
-          editor.setValue(fs[file].data);
-          updateFs();
+          try {
+            editor.setValue(fs[file].data);
+            updateFs();
+            console.log(editor.getModel());
+          } catch (err) {
+            console.error(err);
+          }
           return;
         }
       }
       editor.setValue('');
+    });
+
+    errorCompiling.subscribe(err => {
+      const model = editor.getModel();
+      if (model) {
+        if (err) {
+          const pos = model.getPositionAt(err.offset);
+          if (pos) {
+            monaco.editor.setModelMarkers(model, '1', [
+              {
+                startColumn: pos.column,
+                startLineNumber: pos.lineNumber,
+                message: err.message,
+                severity: MarkerSeverity.Error,
+                endColumn: pos.column,
+                endLineNumber: pos.lineNumber
+              }
+            ]);
+          }
+        } else {
+          monaco.editor.setModelMarkers(model, '1', []);
+        }
+      }
     });
   });
 </script>

@@ -4,6 +4,7 @@
   import {derived} from "svelte/store";
   import * as clipboard from 'clipboard-copy';
   import * as toastr from "toastr";
+  import * as hastebin from 'hastebin-gen';
 
   const keys = derived(filesystem, (fs) => Object.keys(fs).sort());
 
@@ -78,7 +79,6 @@ func main() {
   }
 
   function exportFile(fs: Filesystem, filename: string) {
-    console.log(clipboard);
     clipboard.default(JSON.stringify({
       [filename]: fs[filename],
     }));
@@ -102,6 +102,10 @@ func main() {
       return;
     }
 
+    parseImport(fs, parsed);
+  }
+
+  function parseImport(fs: Filesystem, parsed: Filesystem) {
     const result: Filesystem = {};
     for (let name of Object.keys(parsed)) {
       let validName = name;
@@ -132,6 +136,38 @@ func main() {
     toastr.options.positionClass = 'toast-bottom-center';
     toastr.success('Imported ' + Object.keys(result).length + ' files');
   }
+
+  function shareFile(fs: Filesystem, filename: string) {
+    toastr.options.positionClass = 'toast-bottom-center';
+    toastr.info('Generating link...');
+
+    hastebin.default(fs[filename].data, {
+      extension: "go",
+      url: "https://cors-anywhere.herokuapp.com/https://hastebin.com"
+    }).then(haste => {
+      const fullUrl = 'https://cors-anywhere.herokuapp.com/https://hastebin.com/raw/' + haste.match(/hastebin.com\/([^.]+).go/)[1];
+      clipboard.default(window.location.origin + '?import=' + encodeURIComponent(fullUrl) + '&name=' + encodeURIComponent(filename));
+      toastr.options.positionClass = 'toast-bottom-center';
+      toastr.success('Link copied to clipboard');
+    }).catch(error => {
+      console.error(error);
+      toastr.options.positionClass = 'toast-bottom-center';
+      toastr.error('Error generating link');
+    });
+  }
+
+  if (window && window.location && window.location.search) {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('import') && urlParams.has('name')) {
+      toastr.options.positionClass = 'toast-bottom-center';
+      toastr.info('Importing ' + urlParams.get('import'));
+
+      const name = urlParams.get('name');
+      fetch(urlParams.get('import'))
+        .then(async (data) => parseImport($filesystem, {[name]: {data: await data.text()}}));
+      window.history.replaceState({}, '', window.location.origin);
+    }
+  }
 </script>
 
 <div class="files">
@@ -158,6 +194,9 @@ func main() {
                     </button>
                     <button on:click={() => exportFile($filesystem, name)} title="Export File">
                         <div class='codicon codicon-json'></div>
+                    </button>
+                    <button on:click={() => shareFile($filesystem, name)} title="Share File">
+                        <div class='codicon codicon-package'></div>
                     </button>
                 </div>
             </div>

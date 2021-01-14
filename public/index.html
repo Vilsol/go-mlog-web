@@ -24,6 +24,7 @@
 		const go = new Go();
 		WebAssembly.instantiateStreaming(fetch("https://vilsol.github.io/go-mlog/go-mlog.wasm"), go.importObject).then((result) => {
 			go.run(result.instance);
+			window.transpiler_instantiated = true
 		});
 	</script>
 

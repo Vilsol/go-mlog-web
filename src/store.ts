@@ -1,9 +1,16 @@
 import {writable} from "svelte/store";
 
+export interface File {
+  data: string;
+}
+
 export interface Filesystem {
-  [key: string]: {
-    data: string;
-  }
+  [key: string]: File
+}
+
+export interface ErrorCompiling {
+  offset: number;
+  message: string;
 }
 
 const initialFile = `package main
@@ -42,5 +49,7 @@ if (localStorage.getItem('mlog_fs')) {
 export const filesystem = writable(initialFs);
 
 export const currentFile = writable(Object.keys(initialFs).sort()[0]);
+
+export const errorCompiling = writable<ErrorCompiling | undefined>(undefined);
 
 filesystem.subscribe((fs) => localStorage.setItem('mlog_fs', JSON.stringify(fs)));

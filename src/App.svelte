@@ -2,7 +2,7 @@
   import MonacoEditor from './components/monaco/monaco.svelte';
   import Files from './components/files/files.svelte';
   import {derived} from 'svelte/store';
-  import {currentFile, filesystem} from './store';
+  import {currentFile, filesystem, errorCompiling} from './store';
   import * as clipboard from "clipboard-copy";
   import * as toastr from "toastr";
 
@@ -12,19 +12,35 @@
 
   let transpiled = '';
 
-  function compile() {
+  function compile(): boolean {
     if (code === '') {
       transpiled = '';
-      return
+      return true;
     }
 
     try {
-      if (transpileGo) {
+      if (window['transpiler_instantiated'] && transpileGo) {
         transpiled = transpileGo(code);
+
+        if (transpiled) {
+          const match = transpiled.match(/^error at ([0-9]+): (.+)$/);
+          if (match) {
+            errorCompiling.set({
+              message: match[2],
+              offset: parseInt(match[1])
+            });
+          } else {
+            errorCompiling.set(undefined);
+          }
+        }
+
+        return true;
       }
     } catch (e) {
       console.error(e);
     }
+
+    return false;
   }
 
   function copyOutput() {
@@ -44,6 +60,13 @@
       compile();
     }
   });
+
+  let loops = 0;
+  const initCompile = setInterval(() => {
+    if (compile() || loops++ > 40) {
+      clearInterval(initCompile);
+    }
+  }, 250)
 </script>
 
 <main style="height: 100%">
