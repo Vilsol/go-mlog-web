@@ -85,6 +85,234 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+.monaco-editor .snippet-placeholder {
+	min-width: 2px;
+	outline-style: solid;
+	outline-width: 1px;
+}
+
+.monaco-editor .finish-snippet-placeholder {
+	outline-style: solid;
+	outline-width: 1px;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/* Find widget */
+.monaco-editor .find-widget {
+	position: absolute;
+	z-index: 50;
+	height: 33px;
+	overflow: hidden;
+	line-height: 19px;
+	transition: transform 200ms linear;
+	padding: 0 4px;
+	box-sizing: border-box;
+	transform: translateY(calc(-100% - 10px)); /* shadow (10px) */
+}
+
+.monaco-editor .find-widget textarea {
+	margin: 0px;
+}
+
+.monaco-editor .find-widget.hiddenEditor {
+	display: none;
+}
+
+/* Find widget when replace is toggled on */
+.monaco-editor .find-widget.replaceToggled > .replace-part {
+	display: flex;
+}
+
+.monaco-editor .find-widget.visible  {
+	transform: translateY(0);
+}
+
+.monaco-editor .find-widget .monaco-inputbox.synthetic-focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+.monaco-editor .find-widget .monaco-inputbox .input {
+	background-color: transparent;
+	min-height: 0;
+}
+
+.monaco-editor .find-widget .monaco-findInput .input {
+	font-size: 13px;
+}
+
+.monaco-editor .find-widget > .find-part,
+.monaco-editor .find-widget > .replace-part {
+	margin: 4px 0 0 17px;
+	font-size: 12px;
+	display: flex;
+}
+
+.monaco-editor .find-widget > .find-part .monaco-inputbox,
+.monaco-editor .find-widget > .replace-part .monaco-inputbox {
+	min-height: 25px;
+}
+
+
+.monaco-editor .find-widget > .replace-part .monaco-inputbox > .wrapper > .mirror {
+	padding-right: 22px;
+}
+
+.monaco-editor .find-widget > .find-part .monaco-inputbox > .wrapper > .input,
+.monaco-editor .find-widget > .find-part .monaco-inputbox > .wrapper > .mirror,
+.monaco-editor .find-widget > .replace-part .monaco-inputbox > .wrapper > .input,
+.monaco-editor .find-widget > .replace-part .monaco-inputbox > .wrapper > .mirror {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.monaco-editor .find-widget > .find-part .find-actions {
+	height: 25px;
+	display: flex;
+	align-items: center;
+}
+
+.monaco-editor .find-widget > .replace-part .replace-actions {
+	height: 25px;
+	display: flex;
+	align-items: center;
+}
+
+.monaco-editor .find-widget .monaco-findInput {
+	vertical-align: middle;
+	display: flex;
+	flex:1;
+}
+
+.monaco-editor .find-widget .monaco-findInput .monaco-scrollable-element {
+	/* Make sure textarea inherits the width correctly */
+	width: 100%;
+}
+
+.monaco-editor .find-widget .monaco-findInput .monaco-scrollable-element .scrollbar.vertical {
+	/* Hide vertical scrollbar */
+	opacity: 0;
+}
+
+.monaco-editor .find-widget .matchesCount {
+	display: flex;
+	flex: initial;
+	margin: 0 0 0 3px;
+	padding: 2px 0 0 2px;
+	height: 25px;
+	vertical-align: middle;
+	box-sizing: border-box;
+	text-align: center;
+	line-height: 23px;
+}
+
+.monaco-editor .find-widget .button {
+	width: 20px;
+	height: 20px;
+	display: flex;
+	flex: initial;
+	margin-left: 3px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.monaco-editor .find-widget .button.left {
+	margin-left: 0;
+	margin-right: 3px;
+}
+
+.monaco-editor .find-widget .button.wide {
+	width: auto;
+	padding: 1px 6px;
+	top: -1px;
+}
+
+.monaco-editor .find-widget .button.toggle {
+	position: absolute;
+	top: 0;
+	left: 3px;
+	width: 18px;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.monaco-editor .find-widget .button.toggle.disabled {
+	display: none;
+}
+
+.monaco-editor .find-widget .disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+.monaco-editor .find-widget > .replace-part {
+	display: none;
+}
+
+.monaco-editor .find-widget > .replace-part > .monaco-findInput {
+	position: relative;
+	display: flex;
+	vertical-align: middle;
+	flex: auto;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+
+.monaco-editor .find-widget > .replace-part > .monaco-findInput > .controls {
+	position: absolute;
+	top: 3px;
+	right: 2px;
+}
+
+/* REDUCED */
+.monaco-editor .find-widget.reduced-find-widget .matchesCount {
+	display:none;
+}
+
+/* NARROW (SMALLER THAN REDUCED) */
+.monaco-editor .find-widget.narrow-find-widget {
+	max-width: 257px !important;
+}
+
+/* COLLAPSED (SMALLER THAN NARROW) */
+.monaco-editor .find-widget.collapsed-find-widget {
+	max-width: 170px !important;
+}
+
+.monaco-editor .find-widget.collapsed-find-widget .button.previous,
+.monaco-editor .find-widget.collapsed-find-widget .button.next,
+.monaco-editor .find-widget.collapsed-find-widget .button.replace,
+.monaco-editor .find-widget.collapsed-find-widget .button.replace-all,
+.monaco-editor .find-widget.collapsed-find-widget > .find-part .monaco-findInput .controls {
+	display:none;
+}
+
+.monaco-editor .findMatch {
+	animation-duration: 0;
+	animation-name: inherit !important;
+}
+
+.monaco-editor .find-widget .monaco-sash {
+	left: 0 !important;
+}
+
+.monaco-editor.hc-black .find-widget .button:before {
+	position: relative;
+	top: 1px;
+	left: 2px;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 
 /* Default standalone editor fonts */
 .monaco-editor {
@@ -316,234 +544,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 	outline-offset: -1px;
 	opacity: 1 !important;
 }*/
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-.monaco-editor .snippet-placeholder {
-	min-width: 2px;
-	outline-style: solid;
-	outline-width: 1px;
-}
-
-.monaco-editor .finish-snippet-placeholder {
-	outline-style: solid;
-	outline-width: 1px;
-}
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-/* Find widget */
-.monaco-editor .find-widget {
-	position: absolute;
-	z-index: 50;
-	height: 33px;
-	overflow: hidden;
-	line-height: 19px;
-	transition: transform 200ms linear;
-	padding: 0 4px;
-	box-sizing: border-box;
-	transform: translateY(calc(-100% - 10px)); /* shadow (10px) */
-}
-
-.monaco-editor .find-widget textarea {
-	margin: 0px;
-}
-
-.monaco-editor .find-widget.hiddenEditor {
-	display: none;
-}
-
-/* Find widget when replace is toggled on */
-.monaco-editor .find-widget.replaceToggled > .replace-part {
-	display: flex;
-}
-
-.monaco-editor .find-widget.visible  {
-	transform: translateY(0);
-}
-
-.monaco-editor .find-widget .monaco-inputbox.synthetic-focus {
-	outline: 1px solid -webkit-focus-ring-color;
-	outline-offset: -1px;
-}
-
-.monaco-editor .find-widget .monaco-inputbox .input {
-	background-color: transparent;
-	min-height: 0;
-}
-
-.monaco-editor .find-widget .monaco-findInput .input {
-	font-size: 13px;
-}
-
-.monaco-editor .find-widget > .find-part,
-.monaco-editor .find-widget > .replace-part {
-	margin: 4px 0 0 17px;
-	font-size: 12px;
-	display: flex;
-}
-
-.monaco-editor .find-widget > .find-part .monaco-inputbox,
-.monaco-editor .find-widget > .replace-part .monaco-inputbox {
-	min-height: 25px;
-}
-
-
-.monaco-editor .find-widget > .replace-part .monaco-inputbox > .wrapper > .mirror {
-	padding-right: 22px;
-}
-
-.monaco-editor .find-widget > .find-part .monaco-inputbox > .wrapper > .input,
-.monaco-editor .find-widget > .find-part .monaco-inputbox > .wrapper > .mirror,
-.monaco-editor .find-widget > .replace-part .monaco-inputbox > .wrapper > .input,
-.monaco-editor .find-widget > .replace-part .monaco-inputbox > .wrapper > .mirror {
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-
-.monaco-editor .find-widget > .find-part .find-actions {
-	height: 25px;
-	display: flex;
-	align-items: center;
-}
-
-.monaco-editor .find-widget > .replace-part .replace-actions {
-	height: 25px;
-	display: flex;
-	align-items: center;
-}
-
-.monaco-editor .find-widget .monaco-findInput {
-	vertical-align: middle;
-	display: flex;
-	flex:1;
-}
-
-.monaco-editor .find-widget .monaco-findInput .monaco-scrollable-element {
-	/* Make sure textarea inherits the width correctly */
-	width: 100%;
-}
-
-.monaco-editor .find-widget .monaco-findInput .monaco-scrollable-element .scrollbar.vertical {
-	/* Hide vertical scrollbar */
-	opacity: 0;
-}
-
-.monaco-editor .find-widget .matchesCount {
-	display: flex;
-	flex: initial;
-	margin: 0 0 0 3px;
-	padding: 2px 0 0 2px;
-	height: 25px;
-	vertical-align: middle;
-	box-sizing: border-box;
-	text-align: center;
-	line-height: 23px;
-}
-
-.monaco-editor .find-widget .button {
-	width: 20px;
-	height: 20px;
-	display: flex;
-	flex: initial;
-	margin-left: 3px;
-	background-position: center center;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.monaco-editor .find-widget .button.left {
-	margin-left: 0;
-	margin-right: 3px;
-}
-
-.monaco-editor .find-widget .button.wide {
-	width: auto;
-	padding: 1px 6px;
-	top: -1px;
-}
-
-.monaco-editor .find-widget .button.toggle {
-	position: absolute;
-	top: 0;
-	left: 3px;
-	width: 18px;
-	height: 100%;
-	box-sizing: border-box;
-}
-
-.monaco-editor .find-widget .button.toggle.disabled {
-	display: none;
-}
-
-.monaco-editor .find-widget .disabled {
-	opacity: 0.3;
-	cursor: default;
-}
-
-.monaco-editor .find-widget > .replace-part {
-	display: none;
-}
-
-.monaco-editor .find-widget > .replace-part > .monaco-findInput {
-	position: relative;
-	display: flex;
-	vertical-align: middle;
-	flex: auto;
-	flex-grow: 0;
-	flex-shrink: 0;
-}
-
-.monaco-editor .find-widget > .replace-part > .monaco-findInput > .controls {
-	position: absolute;
-	top: 3px;
-	right: 2px;
-}
-
-/* REDUCED */
-.monaco-editor .find-widget.reduced-find-widget .matchesCount {
-	display:none;
-}
-
-/* NARROW (SMALLER THAN REDUCED) */
-.monaco-editor .find-widget.narrow-find-widget {
-	max-width: 257px !important;
-}
-
-/* COLLAPSED (SMALLER THAN NARROW) */
-.monaco-editor .find-widget.collapsed-find-widget {
-	max-width: 170px !important;
-}
-
-.monaco-editor .find-widget.collapsed-find-widget .button.previous,
-.monaco-editor .find-widget.collapsed-find-widget .button.next,
-.monaco-editor .find-widget.collapsed-find-widget .button.replace,
-.monaco-editor .find-widget.collapsed-find-widget .button.replace-all,
-.monaco-editor .find-widget.collapsed-find-widget > .find-part .monaco-findInput .controls {
-	display:none;
-}
-
-.monaco-editor .findMatch {
-	animation-duration: 0;
-	animation-name: inherit !important;
-}
-
-.monaco-editor .find-widget .monaco-sash {
-	left: 0 !important;
-}
-
-.monaco-editor.hc-black .find-widget .button:before {
-	position: relative;
-	top: 1px;
-	left: 2px;
-}
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -1109,6 +1109,78 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 	text-decoration: underline;
 	cursor: pointer;
 }/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .accessibilityHelpWidget {
+	padding: 10px;
+	vertical-align: middle;
+	overflow: scroll;
+}/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .iPadShowKeyboard {
+	width: 58px;
+	min-width: 0;
+	height: 36px;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	resize: none;
+	overflow: hidden;
+	background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTMiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCA1MyAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwKSI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNDguMDM2NCA0LjAxMDQySDQuMDA3NzlMNC4wMDc3OSAzMi4wMjg2SDQ4LjAzNjRWNC4wMTA0MlpNNC4wMDc3OSAwLjAwNzgxMjVDMS43OTcyMSAwLjAwNzgxMjUgMC4wMDUxODc5OSAxLjc5OTg0IDAuMDA1MTg3OTkgNC4wMTA0MlYzMi4wMjg2QzAuMDA1MTg3OTkgMzQuMjM5MiAxLjc5NzIxIDM2LjAzMTIgNC4wMDc3OSAzNi4wMzEySDQ4LjAzNjRDNTAuMjQ3IDM2LjAzMTIgNTIuMDM5IDM0LjIzOTIgNTIuMDM5IDMyLjAyODZWNC4wMTA0MkM1Mi4wMzkgMS43OTk4NCA1MC4yNDcgMC4wMDc4MTI1IDQ4LjAzNjQgMC4wMDc4MTI1SDQuMDA3NzlaTTguMDEwNDIgOC4wMTMwMkgxMi4wMTNWMTIuMDE1Nkg4LjAxMDQyVjguMDEzMDJaTTIwLjAxODIgOC4wMTMwMkgxNi4wMTU2VjEyLjAxNTZIMjAuMDE4MlY4LjAxMzAyWk0yNC4wMjA4IDguMDEzMDJIMjguMDIzNFYxMi4wMTU2SDI0LjAyMDhWOC4wMTMwMlpNMzYuMDI4NiA4LjAxMzAySDMyLjAyNlYxMi4wMTU2SDM2LjAyODZWOC4wMTMwMlpNNDAuMDMxMiA4LjAxMzAySDQ0LjAzMzlWMTIuMDE1Nkg0MC4wMzEyVjguMDEzMDJaTTE2LjAxNTYgMTYuMDE4Mkg4LjAxMDQyVjIwLjAyMDhIMTYuMDE1NlYxNi4wMTgyWk0yMC4wMTgyIDE2LjAxODJIMjQuMDIwOFYyMC4wMjA4SDIwLjAxODJWMTYuMDE4MlpNMzIuMDI2IDE2LjAxODJIMjguMDIzNFYyMC4wMjA4SDMyLjAyNlYxNi4wMTgyWk00NC4wMzM5IDE2LjAxODJWMjAuMDIwOEgzNi4wMjg2VjE2LjAxODJINDQuMDMzOVpNMTIuMDEzIDI0LjAyMzRIOC4wMTA0MlYyOC4wMjZIMTIuMDEzVjI0LjAyMzRaTTE2LjAxNTYgMjQuMDIzNEgzNi4wMjg2VjI4LjAyNkgxNi4wMTU2VjI0LjAyMzRaTTQ0LjAzMzkgMjQuMDIzNEg0MC4wMzEyVjI4LjAyNkg0NC4wMzM5VjI0LjAyMzRaIiBmaWxsPSIjNDI0MjQyIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDAiPgo8cmVjdCB3aWR0aD0iNTMiIGhlaWdodD0iMzYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==") center center no-repeat;
+	border: 4px solid #F6F6F6;
+	border-radius: 4px;
+}
+
+.monaco-editor.vs-dark .iPadShowKeyboard {
+	background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTMiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCA1MyAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwKSI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNDguMDM2NCA0LjAxMDQySDQuMDA3NzlMNC4wMDc3OSAzMi4wMjg2SDQ4LjAzNjRWNC4wMTA0MlpNNC4wMDc3OSAwLjAwNzgxMjVDMS43OTcyMSAwLjAwNzgxMjUgMC4wMDUxODc5OSAxLjc5OTg0IDAuMDA1MTg3OTkgNC4wMTA0MlYzMi4wMjg2QzAuMDA1MTg3OTkgMzQuMjM5MiAxLjc5NzIxIDM2LjAzMTIgNC4wMDc3OSAzNi4wMzEySDQ4LjAzNjRDNTAuMjQ3IDM2LjAzMTIgNTIuMDM5IDM0LjIzOTIgNTIuMDM5IDMyLjAyODZWNC4wMTA0MkM1Mi4wMzkgMS43OTk4NCA1MC4yNDcgMC4wMDc4MTI1IDQ4LjAzNjQgMC4wMDc4MTI1SDQuMDA3NzlaTTguMDEwNDIgOC4wMTMwMkgxMi4wMTNWMTIuMDE1Nkg4LjAxMDQyVjguMDEzMDJaTTIwLjAxODIgOC4wMTMwMkgxNi4wMTU2VjEyLjAxNTZIMjAuMDE4MlY4LjAxMzAyWk0yNC4wMjA4IDguMDEzMDJIMjguMDIzNFYxMi4wMTU2SDI0LjAyMDhWOC4wMTMwMlpNMzYuMDI4NiA4LjAxMzAySDMyLjAyNlYxMi4wMTU2SDM2LjAyODZWOC4wMTMwMlpNNDAuMDMxMiA4LjAxMzAySDQ0LjAzMzlWMTIuMDE1Nkg0MC4wMzEyVjguMDEzMDJaTTE2LjAxNTYgMTYuMDE4Mkg4LjAxMDQyVjIwLjAyMDhIMTYuMDE1NlYxNi4wMTgyWk0yMC4wMTgyIDE2LjAxODJIMjQuMDIwOFYyMC4wMjA4SDIwLjAxODJWMTYuMDE4MlpNMzIuMDI2IDE2LjAxODJIMjguMDIzNFYyMC4wMjA4SDMyLjAyNlYxNi4wMTgyWk00NC4wMzM5IDE2LjAxODJWMjAuMDIwOEgzNi4wMjg2VjE2LjAxODJINDQuMDMzOVpNMTIuMDEzIDI0LjAyMzRIOC4wMTA0MlYyOC4wMjZIMTIuMDEzVjI0LjAyMzRaTTE2LjAxNTYgMjQuMDIzNEgzNi4wMjg2VjI4LjAyNkgxNi4wMTU2VjI0LjAyMzRaTTQ0LjAzMzkgMjQuMDIzNEg0MC4wMzEyVjI4LjAyNkg0NC4wMzM5VjI0LjAyMzRaIiBmaWxsPSIjQzVDNUM1Ii8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDAiPgo8cmVjdCB3aWR0aD0iNTMiIGhlaWdodD0iMzYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==") center center no-repeat;
+	border: 4px solid #252526;
+}/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .tokens-inspect-widget {
+	z-index: 50;
+	user-select: text;
+	-webkit-user-select: text;
+	-ms-user-select: text;
+	padding: 10px;
+}
+
+.tokens-inspect-separator {
+	height: 1px;
+	border: 0;
+}
+
+.monaco-editor .tokens-inspect-widget .tm-token {
+	font-family: var(--monaco-monospace-font);
+}
+
+.monaco-editor .tokens-inspect-widget .tm-token-length {
+	font-weight: normal;
+	font-size: 60%;
+	float: right;
+}
+
+.monaco-editor .tokens-inspect-widget .tm-metadata-table {
+	width: 100%;
+}
+
+.monaco-editor .tokens-inspect-widget .tm-metadata-value {
+	font-family: var(--monaco-monospace-font);
+	text-align: right;
+}
+
+.monaco-editor .tokens-inspect-widget .tm-token-type {
+	font-family: var(--monaco-monospace-font);
+}
+/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -1845,33 +1917,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
-/* START cover the case that slider is visible on mouseover */
-.monaco-editor .minimap.slider-mouseover .minimap-slider {
-	opacity: 0;
-	transition: opacity 100ms linear;
-}
-.monaco-editor .minimap.slider-mouseover:hover .minimap-slider {
-	opacity: 1;
-}
-.monaco-editor .minimap.slider-mouseover .minimap-slider.active {
-	opacity: 1;
-}
-/* END cover the case that slider is visible on mouseover */
-
-.monaco-editor .minimap-shadow-hidden {
-	position: absolute;
-	width: 0;
-}
-.monaco-editor .minimap-shadow-visible {
-	position: absolute;
-	left: -6px;
-	width: 6px;
-}
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
 .monaco-editor .overlayWidgets {
 	position: absolute;
 	top: 0;
@@ -1884,6 +1929,16 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 .monaco-editor .view-ruler {
 	position: absolute;
 	top: 0;
+}/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .scroll-decoration {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 6px;
 }/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -1907,16 +1962,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 .monaco-editor.hc-black .top-right-radius		{ border-top-right-radius: 0; }
 .monaco-editor.hc-black .bottom-right-radius	{ border-bottom-right-radius: 0; }
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-.monaco-editor .scroll-decoration {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 6px;
-}/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -2002,6 +2047,33 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 
 .cursor-expand > .cursor {
 	animation: monaco-cursor-expand 0.5s ease-in-out 0s 20 alternate;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/* START cover the case that slider is visible on mouseover */
+.monaco-editor .minimap.slider-mouseover .minimap-slider {
+	opacity: 0;
+	transition: opacity 100ms linear;
+}
+.monaco-editor .minimap.slider-mouseover:hover .minimap-slider {
+	opacity: 1;
+}
+.monaco-editor .minimap.slider-mouseover .minimap-slider.active {
+	opacity: 1;
+}
+/* END cover the case that slider is visible on mouseover */
+
+.monaco-editor .minimap-shadow-hidden {
+	position: absolute;
+	width: 0;
+}
+.monaco-editor .minimap-shadow-visible {
+	position: absolute;
+	left: -6px;
+	width: 6px;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -2248,39 +2320,49 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.monaco-editor .monaco-editor-overlaymessage {
-	padding-bottom: 8px;
-	z-index: 10000;
+.monaco-editor .selection-anchor {
+	background-color: #007ACC;
+	width: 2px !important;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor.vs .dnd-target {
+	border-right: 2px dotted black;
+	color: white; /* opposite of black */
+}
+.monaco-editor.vs-dark .dnd-target {
+	border-right: 2px dotted #AEAFAD;
+	color: #51504f; /* opposite of #AEAFAD */
+}
+.monaco-editor.hc-black .dnd-target {
+	border-right: 2px dotted #fff;
+	color: #000; /* opposite of #fff */
 }
 
-@keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+.monaco-editor.mouse-default .view-lines,
+.monaco-editor.vs-dark.mac.mouse-default .view-lines,
+.monaco-editor.hc-black.mac.mouse-default .view-lines {
+	cursor: default;
 }
-.monaco-editor .monaco-editor-overlaymessage.fadeIn {
-	animation: fadeIn 150ms ease-out;
+.monaco-editor.mouse-copy .view-lines,
+.monaco-editor.vs-dark.mac.mouse-copy .view-lines,
+.monaco-editor.hc-black.mac.mouse-copy .view-lines {
+	cursor: copy;
+}/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+.monaco-editor .detected-link,
+.monaco-editor .detected-link-active {
+	text-decoration: underline;
+	text-underline-position: under;
 }
 
-@keyframes fadeOut {
-	from { opacity: 1; }
-	to { opacity: 0; }
-}
-.monaco-editor .monaco-editor-overlaymessage.fadeOut {
-	animation: fadeOut 100ms ease-out;
-}
-
-.monaco-editor .monaco-editor-overlaymessage .message {
-	padding: 1px 4px;
-}
-
-.monaco-editor .monaco-editor-overlaymessage .anchor {
-	width: 0 !important;
-	height: 0 !important;
-	border-color: transparent;
-	border-style: solid;
-	z-index: 1000;
-	border-width: 8px;
-	position: absolute;
+.monaco-editor .detected-link-active {
+	cursor: pointer;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -2343,6 +2425,55 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 
 .monaco-editor .margin-view-zones .lightbulb-glyph:hover {
 	cursor: pointer;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .on-type-rename-decoration {
+	border-left: 1px solid transparent;
+	/* So border can be transparent */
+	background-clip: padding-box;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .monaco-editor-overlaymessage {
+	padding-bottom: 8px;
+	z-index: 10000;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+.monaco-editor .monaco-editor-overlaymessage.fadeIn {
+	animation: fadeIn 150ms ease-out;
+}
+
+@keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+.monaco-editor .monaco-editor-overlaymessage.fadeOut {
+	animation: fadeOut 100ms ease-out;
+}
+
+.monaco-editor .monaco-editor-overlaymessage .message {
+	padding: 1px 4px;
+}
+
+.monaco-editor .monaco-editor-overlaymessage .anchor {
+	width: 0 !important;
+	height: 0 !important;
+	border-color: transparent;
+	border-style: solid;
+	z-index: 1000;
+	border-width: 8px;
+	position: absolute;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -2671,29 +2802,183 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.context-view .monaco-menu {
-	min-width: 130px;
+.monaco-editor .codelens-decoration {
+	overflow: hidden;
+	display: inline-block;
+	text-overflow: ellipsis;
 }
 
+.monaco-editor .codelens-decoration > span,
+.monaco-editor .codelens-decoration > a {
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	white-space: nowrap;
+	vertical-align: sub;
+}
+
+.monaco-editor .codelens-decoration > a {
+	text-decoration: none;
+}
+
+.monaco-editor .codelens-decoration > a:hover {
+	cursor: pointer;
+}
+
+.monaco-editor .codelens-decoration .codicon {
+	vertical-align: middle;
+	color: currentColor !important;
+}
+
+.monaco-editor .codelens-decoration > a:hover .codicon::before {
+	cursor: pointer;
+}
+
+@keyframes fadein {
+	0% { opacity: 0; visibility: visible;}
+	100% { opacity: 1; }
+}
+
+.monaco-editor .codelens-decoration.fadein {
+	animation: fadein 0.1s linear;
+}
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.monaco-editor .lightbulb-glyph,
-.monaco-editor .codicon-lightbulb {
+.monaco-editor .parameter-hints-widget {
+	z-index: 10;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 16px;
-	width: 20px;
-	padding-left: 2px;
+	flex-direction: column;
+	line-height: 1.5em;
 }
 
-.monaco-editor .lightbulb-glyph:hover,
-.monaco-editor .codicon-lightbulb:hover {
+.monaco-editor .parameter-hints-widget > .wrapper {
+	max-width: 440px;
+	display: flex;
+	flex-direction: row;
+}
+
+.monaco-editor .parameter-hints-widget.multiple {
+	min-height: 3.3em;
+	padding: 0;
+}
+
+.monaco-editor .parameter-hints-widget.visible {
+	transition: left .05s ease-in-out;
+}
+
+.monaco-editor .parameter-hints-widget p,
+.monaco-editor .parameter-hints-widget ul {
+	margin: 8px 0;
+}
+
+.monaco-editor .parameter-hints-widget .monaco-scrollable-element,
+.monaco-editor .parameter-hints-widget .body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.monaco-editor .parameter-hints-widget .signature {
+	padding: 4px 5px;
+}
+
+.monaco-editor .parameter-hints-widget .docs {
+	padding: 0 10px 0 5px;
+	white-space: pre-wrap;
+}
+
+.monaco-editor .parameter-hints-widget .docs.empty {
+	display: none;
+}
+
+.monaco-editor .parameter-hints-widget .docs .markdown-docs {
+	white-space: initial;
+}
+
+.monaco-editor .parameter-hints-widget .docs .markdown-docs code {
+	font-family: var(--monaco-monospace-font);
+}
+
+.monaco-editor .parameter-hints-widget .docs .code {
+	white-space: pre-wrap;
+}
+
+.monaco-editor .parameter-hints-widget .docs code {
+	border-radius: 3px;
+	padding: 0 0.4em;
+}
+
+.monaco-editor .parameter-hints-widget .controls {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	min-width: 22px;
+	justify-content: flex-end;
+}
+
+.monaco-editor .parameter-hints-widget.multiple .controls {
+	display: flex;
+	padding: 0 2px;
+}
+
+.monaco-editor .parameter-hints-widget.multiple .button {
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
 	cursor: pointer;
-	/* transform: scale(1.3, 1.3); */
+}
+
+.monaco-editor .parameter-hints-widget .button.previous {
+	bottom: 24px;
+}
+
+.monaco-editor .parameter-hints-widget .overloads {
+	text-align: center;
+	height: 12px;
+	line-height: 12px;
+	opacity: 0.5;
+	font-family: var(--monaco-monospace-font);
+}
+
+.monaco-editor .parameter-hints-widget .signature .parameter.active {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.monaco-editor .parameter-hints-widget .documentation-parameter > .parameter {
+	font-weight: bold;
+	margin-right: 0.5em;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .rename-box {
+	z-index: 100;
+	color: inherit;
+}
+
+.monaco-editor .rename-box.preview {
+	padding: 3px 3px 0 3px;
+}
+
+.monaco-editor .rename-box .rename-input {
+	padding: 3px;
+	width: calc(100% - 6px);
+}
+
+.monaco-editor .rename-box .rename-label {
+	display: none;
+	opacity: .8;
+}
+
+.monaco-editor .rename-box.preview .rename-label {
+	display: inherit;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -2755,6 +3040,87 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 	width: 16px;
 	height: 16px;
 	margin: 2px 0;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.context-view .monaco-menu {
+	min-width: 130px;
+}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-editor .lightbulb-glyph,
+.monaco-editor .codicon-lightbulb {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 16px;
+	width: 20px;
+	padding-left: 2px;
+}
+
+.monaco-editor .lightbulb-glyph:hover,
+.monaco-editor .codicon-lightbulb:hover {
+	cursor: pointer;
+	/* transform: scale(1.3, 1.3); */
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/* -- zone widget */
+.monaco-editor .zone-widget .zone-widget-container.reference-zone-widget {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+}
+
+.monaco-editor .reference-zone-widget .inline {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.monaco-editor .reference-zone-widget .messages {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	padding: 3em 0;
+}
+
+.monaco-editor .reference-zone-widget .ref-tree {
+	line-height: 23px;
+}
+
+.monaco-editor .reference-zone-widget .ref-tree .reference {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.monaco-editor .reference-zone-widget .ref-tree .reference-file {
+	display: inline-flex;
+	width: 100%;
+	height: 100%;
+}
+
+.monaco-editor .reference-zone-widget .ref-tree .monaco-list:focus .selected .reference-file {
+	color: inherit !important;
+}
+
+.monaco-editor .reference-zone-widget .ref-tree .reference-file .count {
+	margin-right: 12px;
+	margin-left: auto;
+}
+
+/* High Contrast Theming */
+
+.monaco-editor.hc-black .reference-zone-widget .ref-tree .reference-file {
+	font-weight: bold;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -2905,118 +3271,65 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-/* -- zone widget */
-.monaco-editor .zone-widget .zone-widget-container.reference-zone-widget {
-	border-top-width: 1px;
-	border-bottom-width: 1px;
-}
-
-.monaco-editor .reference-zone-widget .inline {
-	display: inline-block;
-	vertical-align: top;
-}
-
-.monaco-editor .reference-zone-widget .messages {
-	height: 100%;
-	width: 100%;
-	text-align: center;
-	padding: 3em 0;
-}
-
-.monaco-editor .reference-zone-widget .ref-tree {
-	line-height: 23px;
-}
-
-.monaco-editor .reference-zone-widget .ref-tree .reference {
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.monaco-editor .reference-zone-widget .ref-tree .reference-file {
-	display: inline-flex;
-	width: 100%;
-	height: 100%;
-}
-
-.monaco-editor .reference-zone-widget .ref-tree .monaco-list:focus .selected .reference-file {
-	color: inherit !important;
-}
-
-.monaco-editor .reference-zone-widget .ref-tree .reference-file .count {
-	margin-right: 12px;
-	margin-left: auto;
-}
-
-/* High Contrast Theming */
-
-.monaco-editor.hc-black .reference-zone-widget .ref-tree .reference-file {
-	font-weight: bold;
-}
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-.monaco-tl-row {
-	display: flex;
-	height: 100%;
-	align-items: center;
+.monaco-split-view2 {
 	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
-.monaco-tl-indent {
-	height: 100%;
+.monaco-split-view2 > .sash-container {
 	position: absolute;
-	top: 0;
-	left: 16px;
+	width: 100%;
+	height: 100%;
 	pointer-events: none;
 }
 
-.hide-arrows .monaco-tl-indent {
-	left: 12px;
+.monaco-split-view2 > .sash-container > .monaco-sash {
+	pointer-events: initial;
 }
 
-.monaco-tl-indent > .indent-guide {
-	display: inline-block;
-	box-sizing: border-box;
+.monaco-split-view2 > .split-view-container {
+	width: 100%;
 	height: 100%;
-	border-left: 1px solid transparent;
+	white-space: nowrap;
+	position: relative;
 }
 
-.monaco-tl-indent > .indent-guide {
-	transition: border-color 0.1s linear;
+.monaco-split-view2 > .split-view-container > .split-view-view {
+	white-space: initial;
+	position: absolute;
 }
 
-.monaco-tl-twistie,
-.monaco-tl-contents {
+.monaco-split-view2 > .split-view-container > .split-view-view:not(.visible) {
+	display: none;
+}
+
+.monaco-split-view2.vertical > .split-view-container > .split-view-view {
+	width: 100%;
+}
+
+.monaco-split-view2.horizontal > .split-view-container > .split-view-view {
 	height: 100%;
 }
 
-.monaco-tl-twistie {
-	font-size: 10px;
-	text-align: right;
-	padding-right: 6px;
-	flex-shrink: 0;
-	width: 16px;
-	display: flex !important;
-	align-items: center;
-	justify-content: center;
-	color: inherit !important;
-	transform: translateX(3px);
+.monaco-split-view2.separator-border > .split-view-container > .split-view-view:not(:first-child)::before {
+	content: ' ';
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	pointer-events: none;
+	background-color: var(--separator-border);
 }
 
-.monaco-tl-contents {
-	flex: 1;
-	overflow: hidden;
+.monaco-split-view2.separator-border.horizontal > .split-view-container > .split-view-view:not(:first-child)::before {
+	height: 100%;
+	width: 1px;
 }
 
-.monaco-tl-twistie.collapsed::before {
-	transform: rotate(-90deg);
-}
-
-.monaco-tl-twistie.codicon-tree-item-loading::before {
-	/* Use steps to throttle FPS to reduce CPU usage */
-	animation: codicon-spin 1.25s steps(30) infinite;
+.monaco-split-view2.separator-border.vertical > .split-view-container > .split-view-view:not(:first-child)::before {
+	height: 1px;
+	width: 100%;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3299,65 +3612,66 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.monaco-split-view2 {
-	position: relative;
-	width: 100%;
+.monaco-tl-row {
+	display: flex;
 	height: 100%;
-}
-
-.monaco-split-view2 > .sash-container {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-}
-
-.monaco-split-view2 > .sash-container > .monaco-sash {
-	pointer-events: initial;
-}
-
-.monaco-split-view2 > .split-view-container {
-	width: 100%;
-	height: 100%;
-	white-space: nowrap;
+	align-items: center;
 	position: relative;
 }
 
-.monaco-split-view2 > .split-view-container > .split-view-view {
-	white-space: initial;
-	position: absolute;
-}
-
-.monaco-split-view2 > .split-view-container > .split-view-view:not(.visible) {
-	display: none;
-}
-
-.monaco-split-view2.vertical > .split-view-container > .split-view-view {
-	width: 100%;
-}
-
-.monaco-split-view2.horizontal > .split-view-container > .split-view-view {
+.monaco-tl-indent {
 	height: 100%;
-}
-
-.monaco-split-view2.separator-border > .split-view-container > .split-view-view:not(:first-child)::before {
-	content: ' ';
 	position: absolute;
 	top: 0;
-	left: 0;
-	z-index: 5;
+	left: 16px;
 	pointer-events: none;
-	background-color: var(--separator-border);
 }
 
-.monaco-split-view2.separator-border.horizontal > .split-view-container > .split-view-view:not(:first-child)::before {
+.hide-arrows .monaco-tl-indent {
+	left: 12px;
+}
+
+.monaco-tl-indent > .indent-guide {
+	display: inline-block;
+	box-sizing: border-box;
 	height: 100%;
-	width: 1px;
+	border-left: 1px solid transparent;
 }
 
-.monaco-split-view2.separator-border.vertical > .split-view-container > .split-view-view:not(:first-child)::before {
-	height: 1px;
-	width: 100%;
+.monaco-tl-indent > .indent-guide {
+	transition: border-color 0.1s linear;
+}
+
+.monaco-tl-twistie,
+.monaco-tl-contents {
+	height: 100%;
+}
+
+.monaco-tl-twistie {
+	font-size: 10px;
+	text-align: right;
+	padding-right: 6px;
+	flex-shrink: 0;
+	width: 16px;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	color: inherit !important;
+	transform: translateX(3px);
+}
+
+.monaco-tl-contents {
+	flex: 1;
+	overflow: hidden;
+}
+
+.monaco-tl-twistie.collapsed::before {
+	transform: rotate(-90deg);
+}
+
+.monaco-tl-twistie.codicon-tree-item-loading::before {
+	/* Use steps to throttle FPS to reduce CPU usage */
+	animation: codicon-spin 1.25s steps(30) infinite;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3382,36 +3696,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 	border-radius: 2px;
 	min-height: auto;
 	line-height: normal;
-}
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-.monaco-text-button {
-	box-sizing: border-box;
-	display: flex;
-	width: 100%;
-	padding: 4px;
-	text-align: center;
-	cursor: pointer;
-	outline-offset: 2px !important;
-	justify-content: center;
-	align-items: center;
-}
-
-.monaco-text-button:hover {
-	text-decoration: none !important;
-}
-
-.monaco-button.disabled {
-	opacity: 0.4;
-	cursor: default;
-}
-
-.monaco-button > .codicon {
-	margin: 0 0.2em;
-	color: inherit !important;
 }
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3461,6 +3745,36 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  * 100%: 50 * 100 - 50 (do not overflow): 4950%
  */
 @keyframes progress { from { transform: translateX(0%) scaleX(1) } 50% { transform: translateX(2500%) scaleX(3) } to { transform: translateX(4950%) scaleX(1) } }
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-text-button {
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	padding: 4px;
+	text-align: center;
+	cursor: pointer;
+	outline-offset: 2px !important;
+	justify-content: center;
+	align-items: center;
+}
+
+.monaco-text-button:hover {
+	text-decoration: none !important;
+}
+
+.monaco-button.disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+
+.monaco-button > .codicon {
+	margin: 0 0.2em;
+	color: inherit !important;
+}
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
