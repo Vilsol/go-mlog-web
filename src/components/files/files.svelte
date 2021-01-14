@@ -143,9 +143,9 @@ func main() {
 
     hastebin.default(fs[filename].data, {
       extension: "go",
-      url: "https://cors-anywhere.herokuapp.com/https://hastebin.com"
+      url: "https://hb.vil.so"
     }).then(haste => {
-      const fullUrl = 'https://cors-anywhere.herokuapp.com/https://hastebin.com/raw/' + haste.match(/hastebin.com\/([^.]+).go/)[1];
+      const fullUrl = 'https://hb.vil.so/raw/' + haste.match(/hb.vil.so\/([^.]+).go/)[1];
       clipboard.default(window.location.origin + '?import=' + encodeURIComponent(fullUrl) + '&name=' + encodeURIComponent(filename));
       toastr.options.positionClass = 'toast-bottom-center';
       toastr.success('Link copied to clipboard');
