@@ -146,7 +146,7 @@ func main() {
       url: "https://hb.vil.so"
     }).then(haste => {
       const fullUrl = 'https://hb.vil.so/raw/' + haste.match(/hb.vil.so\/([^.]+).go/)[1];
-      clipboard.default(window.location.origin + '?import=' + encodeURIComponent(fullUrl) + '&name=' + encodeURIComponent(filename));
+      clipboard.default(window.location.origin + window.location.pathname + '?import=' + encodeURIComponent(fullUrl) + '&name=' + encodeURIComponent(filename));
       toastr.options.positionClass = 'toast-bottom-center';
       toastr.success('Link copied to clipboard');
     }).catch(error => {
@@ -165,7 +165,7 @@ func main() {
       const name = urlParams.get('name');
       fetch(urlParams.get('import'))
         .then(async (data) => parseImport($filesystem, {[name]: {data: await data.text()}}));
-      window.history.replaceState({}, '', window.location.origin);
+      window.history.replaceState({}, '', window.location.origin + window.location.pathname);
     }
   }
 </script>
