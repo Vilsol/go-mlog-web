@@ -1,5 +1,5 @@
 body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte-1m1wqpi{height:100%}.ide.svelte-1m1wqpi.svelte-1m1wqpi{display:flex;flex:1;width:100%;height:100%;flex-direction:row
-    }.file-tree.svelte-1m1wqpi.svelte-1m1wqpi{width:15vw}.editor.svelte-1m1wqpi.svelte-1m1wqpi{flex:1;display:flex;border-left:#2d2d2d 3px solid;border-right:#2d2d2d 3px solid}.output.svelte-1m1wqpi.svelte-1m1wqpi{width:20vw;display:flex;flex-direction:column}.output.svelte-1m1wqpi .output-buttons.svelte-1m1wqpi{padding:5px;border-bottom:#2d2d2d 3px solid;display:flex;justify-content:space-between}button.svelte-1m1wqpi.svelte-1m1wqpi{color:#fff;background:#333333;border:#2d2d2d 2px solid;margin:0}button.svelte-1m1wqpi.svelte-1m1wqpi:active{background:#444444}.output.svelte-1m1wqpi textarea.svelte-1m1wqpi{padding:10px 15px;width:100%;height:100%;overflow:auto;background:#1e1e1e;color:#fff;border:none;outline:none;flex:1;white-space:pre;font-family:'Roboto Mono', monospace;font-size:10pt}.github-fork-ribbon.svelte-1m1wqpi.svelte-1m1wqpi:before{background-color:rgb(38, 42, 43)}.github-fork-ribbon.svelte-1m1wqpi.svelte-1m1wqpi::after{color:rgb(232, 230, 227);text-decoration-color:initial;text-shadow:rgba(0, 0, 0, 0.5) 0 -0.08em;border-color:rgba(48, 52, 54, 0.7)}textarea.svelte-1m1wqpi.svelte-1m1wqpi{resize:none}.files.svelte-rhshed.svelte-rhshed{display:flex;flex-direction:column}.files.svelte-rhshed .files-buttons.svelte-rhshed{padding:5px;border-bottom:#2d2d2d 3px solid;display:flex;justify-content:space-between}button.svelte-rhshed.svelte-rhshed{color:#fff;background:#333333;border:#2d2d2d 2px solid;margin:0}button.svelte-rhshed.svelte-rhshed:active{background:#444444}.file.svelte-rhshed.svelte-rhshed{padding:5px;display:flex;justify-content:space-between}.file.selected.svelte-rhshed.svelte-rhshed{background:rgba(255, 255, 255, 0.05)}.file.svelte-rhshed.svelte-rhshed:hover{background:rgba(255, 255, 255, 0.1)}.file-name.svelte-rhshed.svelte-rhshed{padding:10px 15px}/*---------------------------------------------------------------------------------------------
+    }.file-tree.svelte-1m1wqpi.svelte-1m1wqpi{width:15vw}.editor.svelte-1m1wqpi.svelte-1m1wqpi{flex:1;display:flex;border-left:#2d2d2d 3px solid;border-right:#2d2d2d 3px solid}.output.svelte-1m1wqpi.svelte-1m1wqpi{width:20vw;display:flex;flex-direction:column}.output.svelte-1m1wqpi .output-buttons.svelte-1m1wqpi{padding:5px;border-bottom:#2d2d2d 3px solid;display:flex;justify-content:space-between}button.svelte-1m1wqpi.svelte-1m1wqpi{color:#fff;background:#333333;border:#2d2d2d 2px solid;margin:0}button.svelte-1m1wqpi.svelte-1m1wqpi:active{background:#444444}.github-fork-ribbon.svelte-1m1wqpi.svelte-1m1wqpi:before{background-color:rgb(38, 42, 43)}.github-fork-ribbon.svelte-1m1wqpi.svelte-1m1wqpi::after{color:rgb(232, 230, 227);text-decoration-color:initial;text-shadow:rgba(0, 0, 0, 0.5) 0 -0.08em;border-color:rgba(48, 52, 54, 0.7)}.files.svelte-rhshed.svelte-rhshed{display:flex;flex-direction:column}.files.svelte-rhshed .files-buttons.svelte-rhshed{padding:5px;border-bottom:#2d2d2d 3px solid;display:flex;justify-content:space-between}button.svelte-rhshed.svelte-rhshed{color:#fff;background:#333333;border:#2d2d2d 2px solid;margin:0}button.svelte-rhshed.svelte-rhshed:active{background:#444444}.file.svelte-rhshed.svelte-rhshed{padding:5px;display:flex;justify-content:space-between}.file.selected.svelte-rhshed.svelte-rhshed{background:rgba(255, 255, 255, 0.05)}.file.svelte-rhshed.svelte-rhshed:hover{background:rgba(255, 255, 255, 0.1)}.file-name.svelte-rhshed.svelte-rhshed{padding:10px 15px}/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -999,14 +999,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.monaco-aria-container {
-	position: absolute; /* try to hide from window but not from screen readers */
-	left:-999em;
-}/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
 .monaco-action-bar {
 	text-align: right;
 	white-space: nowrap;
@@ -1108,6 +1100,14 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 .monaco-editor .goto-definition-link {
 	text-decoration: underline;
 	cursor: pointer;
+}/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.monaco-aria-container {
+	position: absolute; /* try to hide from window but not from screen readers */
+	left:-999em;
 }/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -1886,23 +1886,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-.monaco-editor .lines-decorations {
-	position: absolute;
-	top: 0;
-	background: white;
-}
-
-/*
-	Keeping name short for faster parsing.
-	cldr = core lines decorations rendering (div)
-*/
-.monaco-editor .margin-view-overlays .cldr {
-	position: absolute;
-	height: 100%;
-}/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
 
 /*
 	Keeping name short for faster parsing.
@@ -2079,6 +2062,23 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+.monaco-editor .lines-decorations {
+	position: absolute;
+	top: 0;
+	background: white;
+}
+
+/*
+	Keeping name short for faster parsing.
+	cldr = core lines decorations rendering (div)
+*/
+.monaco-editor .margin-view-overlays .cldr {
+	position: absolute;
+	height: 100%;
+}/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 .monaco-editor .peekview-widget .head {
 	box-sizing: border-box;
@@ -2162,6 +2162,29 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+.codicon-wrench-subaction {
+	opacity: 0.5;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+@keyframes codicon-spin {
+	100% {
+		transform:rotate(360deg);
+	}
+}
+
+.codicon-animation-spin {
+	/* Use steps to throttle FPS to reduce CPU usage */
+	animation: codicon-spin 1.5s steps(30) infinite;
+}
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 @font-face {
 	font-family: "codicon";
 	src: url(./codicon.ttf) format("truetype");
@@ -2181,29 +2204,6 @@ body{margin:0;padding:0;background:#1e1e1e;color:#fff}main.svelte-1m1wqpi.svelte
 }
 
 /* icon rules are dynamically created in codiconStyles */
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-.codicon-wrench-subaction {
-	opacity: 0.5;
-}
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-@keyframes codicon-spin {
-	100% {
-		transform:rotate(360deg);
-	}
-}
-
-.codicon-animation-spin {
-	/* Use steps to throttle FPS to reduce CPU usage */
-	animation: codicon-spin 1.5s steps(30) infinite;
-}
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
