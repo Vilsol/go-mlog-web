@@ -11,6 +11,7 @@ export interface Filesystem {
 export interface ErrorCompiling {
   offset: number;
   message: string;
+  end: number;
 }
 
 const initialFile = `package main

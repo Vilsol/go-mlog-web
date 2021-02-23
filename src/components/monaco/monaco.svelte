@@ -83,7 +83,6 @@
           try {
             editor.setValue(fs[file].data);
             updateFs();
-            console.log(editor.getModel());
           } catch (err) {
             console.error(err);
           }
@@ -97,7 +96,8 @@
       const model = editor.getModel();
       if (model) {
         if (err) {
-          const pos = model.getPositionAt(err.offset);
+          const pos = model.getPositionAt(err.offset - 1);
+          const endPos = model.getPositionAt(err.end - 1);
           if (pos) {
             monaco.editor.setModelMarkers(model, '1', [
               {
@@ -105,8 +105,8 @@
                 startLineNumber: pos.lineNumber,
                 message: err.message,
                 severity: MarkerSeverity.Error,
-                endColumn: pos.column,
-                endLineNumber: pos.lineNumber
+                endColumn: endPos.column,
+                endLineNumber: endPos.lineNumber
               }
             ]);
           }

@@ -1,6 +1,8 @@
 <script lang="ts">
   import MonacoEditor from './components/monaco/monaco.svelte';
   import Files from './components/files/files.svelte';
+  import Output from './components/output/output.svelte';
+
   import {derived} from 'svelte/store';
   import {currentFile, filesystem, errorCompiling} from './store';
   import * as clipboard from "clipboard-copy";
@@ -23,11 +25,12 @@
         transpiled = transpileGo(code);
 
         if (transpiled) {
-          const match = transpiled.match(/^error at ([0-9]+): (.+)$/);
+          const match = transpiled.match(/^error at ([0-9]+)(?:-([0-9]+))?: (.+)$/);
           if (match) {
             errorCompiling.set({
-              message: match[2],
-              offset: parseInt(match[1])
+              message: match[3],
+              offset: parseInt(match[1]),
+              end: parseInt(match[2] === undefined ? match[1] : match[2])
             });
           } else {
             errorCompiling.set(undefined);
@@ -87,7 +90,7 @@
                     <button on:click={copyOutput}>Copy</button>
                 </div>
             </div>
-            <textarea readonly>{transpiled}</textarea>
+            <Output outputData="{transpiled}"/>
         </div>
     </div>
 
