@@ -24,21 +24,21 @@ func main() {
 \tm.PrintFlush("message1")
 }
 
-func fibonacci(n int) {
+func fibonacci(n int) int {
 \tif n <= 1 {
 \t\treturn n
 \t}
 
 \tgrandparent := 1
 \tparent := 2
-\tresult := parent
+\tme := parent
 \tfor i := 3; i < n; i++ {
 \t\tme = parent + grandparent
 \t\tgrandparent = parent
 \t\tparent = me
 \t}
 
-\treturn result
+\treturn me
 }`
 
 let initialFs: Filesystem = {example: {data: initialFile}};
