@@ -1,1 +1,1 @@
-declare function transpileGo(string): string;
+declare function transpileGo(string, bool, bool, bool): string;

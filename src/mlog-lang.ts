@@ -1,4 +1,5 @@
 import * as monaco from 'monaco-editor';
+import type {languages} from "monaco-editor";
 
 monaco.languages.register({id: 'mlog'})
 
@@ -170,12 +171,129 @@ monaco.editor.defineTheme('mlog-theme', {
   base: 'vs-dark',
   inherit: true,
   rules: [
-    { token: 'custom-simple', foreground: 'a08a8a' },
-    { token: 'custom-actions', foreground: 'd4816b' },
-    { token: 'custom-variables', foreground: '877bad' },
-    { token: 'custom-pointers', foreground: '6bb2b2' },
-    { token: 'custom-units', foreground: 'c7b59d' },
-    { token: 'custom-specials', foreground: 'cbd87e' },
+    {token: 'custom-simple', foreground: 'a08a8a'},
+    {token: 'custom-actions', foreground: 'd4816b'},
+    {token: 'custom-variables', foreground: '877bad'},
+    {token: 'custom-pointers', foreground: '6bb2b2'},
+    {token: 'custom-units', foreground: 'c7b59d'},
+    {token: 'custom-specials', foreground: 'cbd87e'},
   ]
 } as any);
 
+interface GoData<T extends ('function' | 'value')> {
+  type: T;
+}
+
+interface GoField {
+  type: string;
+  name?: string;
+}
+
+interface GoFunction extends GoData<'function'> {
+  comments?: string[];
+  params?: GoField[];
+  results?: GoField[];
+}
+
+interface GoValue extends GoData<'value'> {
+  value: string;
+  comments?: string[];
+}
+
+interface GoPackage {
+  [key: string]: GoFunction | GoValue;
+}
+
+interface GoTypings {
+  [key: string]: GoPackage;
+}
+
+const getSuggestions = (range: languages.CompletionItem['range']) => {
+  const goTypings = window['goTypings'] as GoTypings;
+  const suggestions: languages.CompletionItem[] = [];
+
+  Object.keys(goTypings).forEach(pack => {
+    const packName = pack.substr(pack.lastIndexOf('/') + 1);
+    Object.keys(goTypings[pack]).forEach(name => {
+      const data = goTypings[pack][name];
+      const label = packName + '.' + name;
+
+      if (data.type === 'function') {
+        let detail = name + '(';
+        let insertText = label + '(';
+
+        if (data.params) {
+          insertText += data.params.map((param, i) => {
+            if (param.name) {
+              return `\${${i + 1}:${param.name}}`;
+            }
+            return `\${${i + 1}:}}`;
+          }).join(', ');
+
+          detail += data.params.map((param, i) => {
+            if (param.name) {
+              return param.name + ' ' + param.type;
+            }
+            return param.type;
+          }).join(', ');
+        }
+
+        insertText += ')';
+        detail += ')';
+
+        if (data.results) {
+          detail += ' '
+          if (data.results.length > 1) {
+            detail += '('
+          }
+
+          detail += data.results.map(result => {
+            if (result.name) {
+              return result.name + ' ' + result.type;
+            }
+            return result.type;
+          }).join(', ');
+
+          if (data.results.length > 1) {
+            detail += ')'
+          }
+        }
+
+        suggestions.push({
+          label,
+          kind: monaco.languages.CompletionItemKind.Function,
+          documentation: !data.comments ? undefined : data.comments.map(c => c.substr(2).trim()).join('\n'),
+          insertText: insertText,
+          insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+          range: range,
+          detail: detail
+        });
+      } else if (data.type === 'value') {
+        suggestions.push({
+          label,
+          kind: monaco.languages.CompletionItemKind.Constant,
+          documentation: !data.comments ? undefined : data.comments.map(c => c.substr(2).trim()).join('\n'),
+          insertText: label,
+          range: range,
+          detail: data.value
+        });
+      }
+    })
+  });
+
+  return suggestions;
+}
+
+monaco.languages.registerCompletionItemProvider('go', {
+  provideCompletionItems: function (model, position) {
+    const word = model.getWordUntilPosition(position);
+    return {
+      suggestions: getSuggestions({
+        startLineNumber: position.lineNumber,
+        endLineNumber: position.lineNumber,
+        startColumn: word.startColumn,
+        endColumn: word.endColumn
+      })
+    };
+  }
+});

@@ -14,6 +14,10 @@
 
   let transpiled = '';
 
+  let numbers = false;
+  let comments = false;
+  let source = false;
+
   function compile(): boolean {
     if (code === '') {
       transpiled = '';
@@ -22,7 +26,7 @@
 
     try {
       if (window['transpiler_instantiated'] && transpileGo) {
-        transpiled = transpileGo(code);
+        transpiled = transpileGo(code, numbers, comments, source);
 
         if (transpiled) {
           const match = transpiled.match(/^error at ([0-9]+)(?:-([0-9]+))?: (.+)$/);
@@ -89,6 +93,11 @@
                 <div>
                     <button on:click={copyOutput}>Copy</button>
                 </div>
+            </div>
+            <div>
+                <input type="checkbox" bind:checked={numbers}> Numbers
+                <input type="checkbox" bind:checked={comments}> Comments
+                <input type="checkbox" bind:checked={source}> Source
             </div>
             <Output outputData="{transpiled}"/>
         </div>
